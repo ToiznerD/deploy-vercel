@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import { Triangle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Triangle, ChevronDown, ChevronUp, Loader, Loader2 } from 'lucide-react';
 
 const CryptoTable = () => {
   const [cryptos, setCryptos] = useState([]);
@@ -62,7 +62,11 @@ const CryptoTable = () => {
     return null;
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return (
+    <div className="flex justify-center items-center">
+       <Loader2 size={30} className="text-zinc-300 animate-spin" />
+    </div>
+  );
 
   return (
     <div className="flex flex-col items-center mx-auto p-10">
