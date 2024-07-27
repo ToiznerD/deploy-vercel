@@ -17,7 +17,7 @@ const CryptoTable = () => {
           params: {
             vs_currency: 'usd',
             order: 'market_cap_desc',
-            per_page: 50,
+            per_page: 100,
             page: 1,
             sparkline: false,
             price_change_percentage: '1h,24h,7d'
@@ -66,8 +66,7 @@ const CryptoTable = () => {
 
   return (
     <div className="flex flex-col items-center mx-auto p-10">
-      <h1>Top 50 Cryptocurrencies by Market Cap</h1>
-      <div className="flex justify-start items-center flex-row gap-1 p-2 text-l font-bold w-full bg-zinc-100 rounded-md">
+      <div className="flex sticky justify-start items-center flex-row gap-1 p-2 text-l font-bold w-full bg-zinc-100 rounded-md">
         <div className="w-1/12 cursor-pointer flex flex-row" onClick={() => requestSort('market_cap_rank')}>
           Rank {getSortIcon('market_cap_rank')}
         </div>
@@ -93,6 +92,7 @@ const CryptoTable = () => {
           7d Change {getSortIcon('price_change_percentage_7d_in_currency')}
         </div>
       </div>
+      <div className="w-full h-[85vh] overflow-auto">
       {sortedCryptos.map((crypto: CryptoCoin, index) => (
         <div key={crypto.id} className="flex justify-start items-center flex-row gap-1 p-2 text-l w-full rounded-md hover:bg-zinc-50">
           <div className="w-1/12">{crypto.market_cap_rank}</div>
@@ -117,6 +117,8 @@ const CryptoTable = () => {
           </div>
         </div>
       ))}
+      </div>
+      
     </div>
   );
 };
