@@ -1,20 +1,51 @@
 "use client";
 
 import React, { useState } from 'react';
+import {signIn} from 'next-auth/react';
+import axios from 'axios';
+import { Loader } from 'lucide-react';
 
 const SignUpPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const signup = () => {
-    // Add your signup logic here
-    setAlertMessage('Signup successful!'); // Example message
-    setShowModal(true);
+
+    if (password !== confirmPassword) {
+      setAlertMessage('Passwords do not match');
+      setShowModal(true);
+      return;
+    }
+
+    // Add your signup logic here using email and password
+    console.log('Email:', email);
+    console.log('Password:', password);
+    const data = {email, password}
+    axios.post('/api/register', data)
+      .then(() => {
+        setAlertMessage('Signup successful!');
+        setShowModal(true);
+      })
+      .catch(() => {
+        setAlertMessage('Something went wrong')
+        setShowModal(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   };
 
   const closeModal = () => {
     setShowModal(false);
   };
+
+  if (isLoading){
+    return <Loader size={30} className="animate-spin" />
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -28,23 +59,29 @@ const SignUpPage = () => {
             id="email"
             placeholder="Email"
             className="p-2 mb-4 border border-gray-300 rounded"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             id="Password_signup"
             placeholder="Password"
             className="p-2 mb-4 border border-gray-300 rounded"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <input
             type="password"
             id="confirmPassword"
             placeholder="Confirm Password"
             className="p-2 mb-4 border border-gray-300 rounded"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </form>
         <button
           type="button"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
           onClick={signup}
         >
           Sign up

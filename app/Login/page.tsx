@@ -1,11 +1,37 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import {signIn, useSession} from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+  const { data: session, status }  = useSession();
+
   const submitForm = () => {
-    alert("it's all good")
+    // Add your login logic here using email and password
+    console.log('Email:', email);
+    console.log('Password:', password);
+    const data = {email, password};
+    signIn('credentials', {
+      ...data,
+      redirect: false,
+      callbackUrl: '/',
+    })
   };
+
+  useEffect(() => {
+    if (session) {
+      // Redirect to the home page if logged in
+      router.push('/');
+    }
+  }, [session]);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -19,12 +45,16 @@ const LoginPage = () => {
             id="email"
             placeholder="Email"
             className="p-2 mb-4 border border-gray-300 rounded"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             id="password"
             placeholder="Password"
             className="p-2 mb-4 border border-gray-300 rounded"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </form>
         <button

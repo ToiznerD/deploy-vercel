@@ -1,10 +1,9 @@
 
 import {getMarketData} from '@/lib/utils';
 import CryptoTable from "./components/CryptoTable";
+import getCurrentUser from './actions/getCurrentUser';
 
 export default async function Home() {
-  //const marketData = await getMarketData();
-  //console.log(marketData);
   return (
     <div className="bg-white">
       <div className="text-center p-2 flex sticky justify-center">
