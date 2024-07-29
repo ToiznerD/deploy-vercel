@@ -14,12 +14,6 @@
         "use": "@vercel/static"
       }
     ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/Login"
-      }
-    ],
     "rewrites": [
         {"source": "/(.*)", "destination": "/Login"}
     ]
