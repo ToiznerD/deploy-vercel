@@ -1,9 +1,5 @@
 
-import {getMarketData} from '@/lib/utils';
 import CryptoTable from "./components/CryptoTable";
-import getCurrentUser from './actions/getCurrentUser';
-import { LogOut } from 'lucide-react';
-import { signOut } from 'next-auth/react';
 import LogoutButton from './components/LogoutButton';
 
 export default async function Home() {

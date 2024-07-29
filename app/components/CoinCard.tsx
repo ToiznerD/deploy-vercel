@@ -9,7 +9,7 @@ interface Props {
 const CoinCard = ({ crypto, index} : Props) => {
     return (
         <>
-            <div className="hidden lg:block">
+            <div className="hidden lg:block" key={crypto.id}>
                 <div key={crypto.id} className="flex justify-start items-center flex-row gap-1 p-2 text-l w-full rounded-md hover:bg-zinc-50">
                     <div className="w-1/12">{crypto.market_cap_rank}</div>
                     <div className="w-2/12 flex flex-row gap-1 items-center">
@@ -34,7 +34,7 @@ const CoinCard = ({ crypto, index} : Props) => {
                  </div>
             </div>
             
-            <div className="lg:hidden">
+            <div className="lg:hidden" key={crypto.current_price}>
             <div key={crypto.id} className="flex justify-star flex-col gap-1 p-2 text-l w-full rounded-md border border-zinc-300 my-2 hover:bg-zinc-50">
                     <div><span className="font-bold">Rank: </span> {crypto.market_cap_rank}</div>
                     <div className=" flex flex-row gap-1 items-center">

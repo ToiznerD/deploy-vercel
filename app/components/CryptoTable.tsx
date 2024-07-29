@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Image from 'next/image';
-import { Triangle, ChevronDown, ChevronUp, Loader, Loader2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
 import CoinCard from './CoinCard';
 
 const CryptoTable = () => {
@@ -102,7 +101,7 @@ const CryptoTable = () => {
       </div>
       <div className="w-full h-[85vh] overflow-auto">
       {sortedCryptos.map((crypto: CryptoCoin, index) => (
-        <CoinCard crypto={crypto} index={index} />
+        <CoinCard crypto={crypto} index={index} key={index} />
       ))}
       </div>
       

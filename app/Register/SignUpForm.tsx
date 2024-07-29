@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import { signIn } from 'next-auth/react';
 import axios from 'axios';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
