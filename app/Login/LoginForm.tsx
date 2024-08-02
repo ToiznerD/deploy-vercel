@@ -8,15 +8,28 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
 
   const submitForm = async () => {
-    // Add your login logic here using email and password
-    console.log('Email:', email);
-    console.log('Password:', password);
-    const data = { email, password };
-    await signIn('credentials', {
-      ...data,
-      redirect: true,
-      callbackUrl: '/',
-    });
+    try {
+      // Log the form data for debugging
+      console.log('Email:', email);
+      console.log('Password:', password);
+  
+      // Sign in with credentials
+      const result = await signIn('credentials', {
+        redirect: true, // Set to true to automatically handle redirection
+        email,
+        password,
+        callbackUrl: '/', // Redirect to home page or desired URL after login
+      });
+  
+      // Optionally handle the result if needed
+      if (result?.error) {
+        console.error('Login failed:', result?.error);
+        // Display error message to the user or handle it as needed
+      }
+    } catch (error) {
+      console.error('An error occurred during login:', error);
+      // Optionally display error message to the user or handle it
+    }
   };
 
   return (

@@ -5,6 +5,7 @@ import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from 'bcrypt';
+import client from "@/lib/prismadb";
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
@@ -48,10 +49,14 @@ export const authOptions: AuthOptions = {
     session: {
         strategy: 'jwt',
     },
+    jwt: {
+        secret: process.env.NEXTAUTH_JWT_SECRET,
+    },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async redirect({ url, baseUrl }) {
-          return baseUrl;
+          // Ensure that redirects are only happening to valid URLs
+          return url.startsWith(baseUrl) ? url : baseUrl;
         }
       }
 }
