@@ -61,10 +61,10 @@ const LoginForm = () => {
         Submit
       </button>
       <div className="mt-4">
-        Need an account? <a href="./Register" className="text-blue-500 hover:underline">Click here!</a>
+        Need an account? <a href="/Register" className="text-blue-500 hover:underline">Click here!</a>
       </div>
       <div className="mt-2">
-        Want to talk? <a href="./Contact" className="text-blue-500 hover:underline">Contact us!</a>
+        Want to talk? <a href="/Contact" className="text-blue-500 hover:underline">Contact us!</a>
       </div>
     </div>
   );
