@@ -33,7 +33,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="bg-white p-8 rounded shadow-md w-full max-w-sm flex flex-col justify-center items-center">
+    <div className="p-8 w-full max-w-sm flex flex-col justify-center items-center">
       <div className="text-2xl font-bold mb-4">
         Login to your account
       </div>

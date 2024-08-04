@@ -49,7 +49,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className="bg-white p-8 rounded shadow-md w-full max-w-sm flex flex-col items-center">
+    <div className="bg-white p-8 rounded w-full max-w-sm flex flex-col items-center">
       <div className="text-2xl font-bold mb-4">Sign up</div>
       <form className="flex flex-col">
         <input
