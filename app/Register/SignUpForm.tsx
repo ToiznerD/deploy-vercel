@@ -14,7 +14,37 @@ const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   let login = false;
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password: string) => {
+    const minLength = 6;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()\-_=+\\|[\]{};:/?.><]/.test(password);
+
+    return password.length >= minLength && hasUppercase && hasLowercase && hasNumber && hasSpecialChar;
+  };
+
   const signup = () => {
+    if (!validateEmail(email)) {
+      setAlertMessage('Invalid email address');
+      setShowModal(true);
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setAlertMessage(
+        'Password must be at least 6 characters long, include an uppercase letter, a lowercase letter, a number, and a special character'
+      );
+      setShowModal(true);
+      return;
+    }
+
     if (password !== confirmPassword) {
       setAlertMessage('Passwords do not match');
       setShowModal(true);
