@@ -20,7 +20,7 @@ const ContactPage = () => {
       setLabel('Please fill in all fields.');
       return;
     }
-    axios.post('/api/send-email', { name, email, subject, message })
+    axios.post('/api/send-email', { name, email, subject, message,signup:false})
       .then(() => {
         setLabel('Email sent successfully!');
         clearFields();

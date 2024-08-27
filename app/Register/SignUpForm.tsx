@@ -53,7 +53,7 @@ const SignUpForm = () => {
 
     setIsLoading(true);
 
-    const data = { email, password };
+    const data = { email, password ,signup:true};
     axios.post('/api/register', data)
       .then(() => {
         setAlertMessage('Signup successful!');
