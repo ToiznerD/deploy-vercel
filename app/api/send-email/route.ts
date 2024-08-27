@@ -31,11 +31,11 @@ export async function POST(req: NextRequest) {
                 to: email, 
                 subject: `Welcome to our website!`,
                 text: `
-                Hello ${name} and welcome to our website.    
+                Hello and welcome to our website.    
                 `  
             }
             await transporter.sendMail(mailOptions1);
- 
+            return new NextResponse("Email sent successfully", { status: 200 });
          }
          else {
              mailOptions1 = {

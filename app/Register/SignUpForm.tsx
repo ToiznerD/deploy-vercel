@@ -53,7 +53,7 @@ const SignUpForm = () => {
 
     setIsLoading(true);
 
-    const data = { email, password ,signup:true};
+    const data = { email, password };
     axios.post('/api/register', data)
       .then(() => {
         setAlertMessage('Signup successful!');
@@ -68,6 +68,9 @@ const SignUpForm = () => {
       .finally(() => {
         setIsLoading(false);
       });
+
+      const mailData = { email, name: email, signup: true}
+      axios.post('/api/send-email', mailData)
   };
 
   const closeModal = () => {
